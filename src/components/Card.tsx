@@ -51,13 +51,6 @@ const TaskCard = ({ task }: TaskCardProps) => {
       <div {...listeners} {...attributes} className="text-gray-500 mr-2">
         <GripVertical size={16} className="cursor-grab" />
       </div>
-      {/* <p
-        className="flex-1 text-sm break-all"
-        onTouchEnd={handleTextTap}
-        onDoubleClick={() => setIsEditing(true)}
-      >
-        {task.title}
-      </p> */}
 
       {isEditing ? (
         <input
@@ -77,20 +70,14 @@ const TaskCard = ({ task }: TaskCardProps) => {
       ) : (
         <p
           className="flex-1 text-sm break-all cursor-text"
-          onDoubleClick={() => setIsEditing(true)} // desktop
-          onTouchEnd={handleTextTap} // mobile
+          onDoubleClick={() => setIsEditing(true)}
+          onTouchEnd={handleTextTap}
         >
           {task.title}
         </p>
       )}
 
       <div className="flex gap-1">
-        {/* <button
-          className="btn btn-ghost btn-xs"
-          onClick={() => setIsEditing(true)}
-        >
-          <Pencil size={14} />
-        </button> */}
         <button className="btn btn-ghost btn-xs" onClick={handleDelete}>
           <Trash2 size={14} />
         </button>
