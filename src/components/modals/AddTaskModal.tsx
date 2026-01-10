@@ -20,6 +20,7 @@ const AddTaskModal = ({
             Add Task
           </h2>
           <input
+          autoFocus
             type="text"
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
