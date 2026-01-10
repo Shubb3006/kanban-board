@@ -109,6 +109,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
 
   const style = {
     transform: CSS.Translate.toString(transform),
+    touchAction:'none'
   };
 
   const handleDelete = () => deleteTask(task.id);
