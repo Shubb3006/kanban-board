@@ -42,11 +42,12 @@ import Column from "./Column";
 import TaskCard from "./Card";
 import { useKanbanStore, type Task } from "../store/useKanBanStore";
 
-const sensors = useSensors(
+
+const KanbanBoard = () => {
+  const sensors = useSensors(
   useSensor(PointerSensor),
   useSensor(TouchSensor) // this enables dragging on mobile
 );
-const KanbanBoard = () => {
   const { tasks, moveTask } = useKanbanStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
