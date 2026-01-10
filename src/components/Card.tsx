@@ -88,7 +88,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { Trash2, GripVertical, Pencil } from "lucide-react";
 import { useKanbanStore } from "../store/useKanBanStore";
-import type { Task, ColumnId } from "../store/useKanBanStore";
+import type { Task } from "../store/useKanBanStore";
 import { useState } from "react";
 import EditTaskModal from "./modals/EditTaskModal";
 
