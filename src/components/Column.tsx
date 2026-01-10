@@ -128,11 +128,11 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
   return (
     <div
       ref={setNodeRef}
-      className="bg-base-300 rounded-lg p-3 flex flex-col w-55 md:w-60 lg:w-75   max-h-[80vh] ov"
+      className="bg-base-300 rounded-lg p-3 flex flex-col w-55 md:w-60 lg:w-75 max-h-[80vh] "
     >
       {/* Header */}
       <div
-        className={`flex justify-between items-center mb-3 p-2 rounded ${COLUMN_STYLES[columnId]}`}
+        className={`flex justify-between items-center mb-3 p-2 rounded ${COLUMN_STYLES[columnId]} `}
       >
         <h2 className="font-semibold text-sm tracking-wide uppercase">
           {title}
@@ -146,7 +146,7 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
       </div>
 
       {/* Task List */}
-      <div className="flex-1  space-y-2 pr-1">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden space-y-2 pr-1">
         {tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}
