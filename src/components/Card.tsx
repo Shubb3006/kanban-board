@@ -72,7 +72,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
               setIsEditing(false);
             }
           }}
-          className="flex-1 text-sm bg-transparent border-b border-gray-400 outline-none"
+          className="flex-1 min-w-0 text-sm bg-transparent border-b border-gray-400 outline-none"
         />
       ) : (
         <p
