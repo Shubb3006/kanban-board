@@ -4,7 +4,6 @@ import { useState } from "react";
 import type { ColumnId, Task } from "../store/useKanBanStore";
 import { useKanbanStore } from "../store/useKanBanStore";
 import TaskCard from "./Card";
-import AddTaskModal from "./modals/AddTaskModal";
 
 const COLUMN_STYLES: Record<ColumnId, string> = {
   todo: "bg-blue-100 text-blue-700",
@@ -58,17 +57,28 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
         {tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}
-      </div>
 
-      {/* Add Task Input */}
-      {isAdding && (
-        <AddTaskModal
-          handleAdd={handleAdd}
-          taskTitle={newTitle}
-          setTaskTitle={setNewTitle}
-          onClose={() => setIsAdding(false)}
-        />
-      )}
+        {isAdding && (
+          <input
+            autoFocus
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            onBlur={(e) => {
+              if (newTitle.trim()) {
+                handleAdd(e);
+              } else setIsAdding(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleAdd(e);
+              if (e.key === "Escape") {
+                setNewTitle(newTitle);
+                setIsAdding(false);
+              }
+            }}
+            className="flex-1 min-w-0 text-sm bg-transparent border-b border-gray-400 outline-none"
+          />
+        )}
+      </div>
     </div>
   );
 };
