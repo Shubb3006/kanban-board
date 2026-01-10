@@ -128,7 +128,7 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
   return (
     <div
       ref={setNodeRef}
-      className="bg-base-300 rounded-lg p-3 flex flex-col w-75 max-h-[80vh]"
+      className="bg-base-300 rounded-lg p-3 flex flex-col w-55 md:w-60 lg:w-75   max-h-[80vh] ov"
     >
       {/* Header */}
       <div

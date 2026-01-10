@@ -84,6 +84,7 @@
 // };
 
 // export default TaskCard;
+
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { Trash2, GripVertical, Pencil } from "lucide-react";
@@ -122,12 +123,12 @@ const TaskCard = ({ task }: TaskCardProps) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="bg-base-100 p-3 rounded shadow flex justify-between items-center"
+      className="bg-base-100 p-3 rounded shadow wrap-break-word flex justify-between items-center"
     >
       <div {...listeners} {...attributes} className="text-gray-500 mr-2">
         <GripVertical size={16} className="cursor-grab" />
       </div>
-      <p className="flex-1 text-sm">{task.title}</p>
+      <p className="flex-1 text-sm break-all">{task.title}</p>
       <div className="flex gap-1">
         <button
           className="btn btn-ghost btn-xs"

@@ -36,12 +36,13 @@
 // };
 
 // export default KanbanBoard;
+
+
 import { DndContext, closestCorners, DragOverlay } from "@dnd-kit/core";
 import { useState } from "react";
 import Column from "./Column";
 import TaskCard from "./Card";
-import{  useKanbanStore, type Task } from "../store/useKanBanStore";
-
+import { useKanbanStore, type Task } from "../store/useKanBanStore";
 
 const KanbanBoard = () => {
   const { tasks, moveTask } = useKanbanStore();
@@ -75,14 +76,16 @@ const KanbanBoard = () => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex gap-4 p-4 justify-center">
+      <div className="flex flex-col sm:flex-row gap-4 p-4 justify-center">
+        {/* Columns */}
         <Column title="Todo" columnId="todo" tasks={todoTasks} />
         <Column title="In Progress" columnId="inProgress" tasks={inProgressTasks} />
         <Column title="Done" columnId="done" tasks={doneTasks} />
       </div>
 
+      {/* Drag Overlay */}
       <DragOverlay>
-        {activeTask ? <TaskCard task={activeTask} /> : null}
+        {activeTask && <TaskCard task={activeTask} />}
       </DragOverlay>
     </DndContext>
   );
