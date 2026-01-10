@@ -36,14 +36,16 @@
 // };
 
 // export default KanbanBoard;
-
-
-import { DndContext, closestCorners, DragOverlay } from "@dnd-kit/core";
+import { DndContext, closestCorners, DragOverlay, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useState } from "react";
 import Column from "./Column";
 import TaskCard from "./Card";
 import { useKanbanStore, type Task } from "../store/useKanBanStore";
 
+const sensors = useSensors(
+  useSensor(PointerSensor),
+  useSensor(TouchSensor) // this enables dragging on mobile
+);
 const KanbanBoard = () => {
   const { tasks, moveTask } = useKanbanStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
@@ -73,20 +75,23 @@ const KanbanBoard = () => {
   return (
     <DndContext
       collisionDetection={closestCorners}
+      sensors={sensors}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
       <div className="flex flex-col sm:flex-row gap-4 p-4 justify-center">
         {/* Columns */}
         <Column title="Todo" columnId="todo" tasks={todoTasks} />
-        <Column title="In Progress" columnId="inProgress" tasks={inProgressTasks} />
+        <Column
+          title="In Progress"
+          columnId="inProgress"
+          tasks={inProgressTasks}
+        />
         <Column title="Done" columnId="done" tasks={doneTasks} />
       </div>
 
       {/* Drag Overlay */}
-      <DragOverlay>
-        {activeTask && <TaskCard task={activeTask} />}
-      </DragOverlay>
+      <DragOverlay>{activeTask && <TaskCard task={activeTask} />}</DragOverlay>
     </DndContext>
   );
 };
