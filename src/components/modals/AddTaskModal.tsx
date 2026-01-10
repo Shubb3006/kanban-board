@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 interface AddTaskModalProps {
   handleAdd: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -11,7 +11,14 @@ const AddTaskModal = ({
   taskTitle,
   setTaskTitle,
   onClose,
-}:AddTaskModalProps) => {
+}: AddTaskModalProps) => {
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
   return (
     <div className="modal modal-open">
       <div className="modal-box max-w-md w-full">
@@ -20,7 +27,7 @@ const AddTaskModal = ({
             Add Task
           </h2>
           <input
-          autoFocus
+            autoFocus
             type="text"
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
@@ -30,10 +37,7 @@ const AddTaskModal = ({
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <button
-              className="btn btn-ghost"
-              onClick={onClose}
-            >
+            <button className="btn btn-ghost" onClick={onClose}>
               Close
             </button>
           </div>
