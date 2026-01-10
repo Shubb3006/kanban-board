@@ -75,11 +75,11 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleAdd(e);
               if (e.key === "Escape") {
-                setNewTitle(newTitle);
+                setNewTitle("");
                 setIsAdding(false);
               }
             }}
-            className="flex-1 min-w-0 text-sm bg-transparent border-b border-gray-400 outline-none"
+            className="flex-1 min-w-0 w-full text-sm bg-transparent border-b border-gray-400 outline-none"
           />
         )}
       </div>

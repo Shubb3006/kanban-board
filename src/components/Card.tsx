@@ -69,7 +69,13 @@ const TaskCard = ({ task }: TaskCardProps) => {
           className="flex-1 min-w-0 text-sm bg-transparent border-b border-gray-400 outline-none"
         />
       ) : isDeleting ? (
-        <div className="flex-1 rounded-md bg-red-50 border border-red-200 p-2">
+        <div
+          className="flex-1 rounded-md bg-red-50 border border-red-200 p-2"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") deleteTask(task.id);
+            if (e.key === "Escape") setIsDeleting(false);
+          }}
+        >
           <p className="text-sm font-medium text-red-700">Delete this task?</p>
           <div className="flex justify-end gap-2 mt-2">
             <button
