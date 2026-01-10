@@ -36,18 +36,29 @@
 // };
 
 // export default KanbanBoard;
-import { DndContext, closestCorners, DragOverlay, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCorners,
+  DragOverlay,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { useState } from "react";
 import Column from "./Column";
 import TaskCard from "./Card";
 import { useKanbanStore, type Task } from "../store/useKanBanStore";
 
-
 const KanbanBoard = () => {
   const sensors = useSensors(
-  useSensor(PointerSensor),
-  useSensor(TouchSensor) // this enables dragging on mobile
-);
+    useSensor(PointerSensor),
+   useSensor(TouchSensor, {
+    activationConstraint: {
+      distance: 5, // start dragging after moving 5px
+    },
+  })
+  );
   const { tasks, moveTask } = useKanbanStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
