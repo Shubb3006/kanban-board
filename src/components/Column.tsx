@@ -35,9 +35,10 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
   return (
     <div
       ref={setNodeRef}
-      className="bg-base-300 rounded-lg p-3 flex flex-col w-55 md:w-60 lg:w-75 max-h-[80vh] "
+      className="bg-base-300 rounded-lg p-3 flex flex-col
+             w-55  lg:w-70
+             max-h-[85vh] sm:max-h-[80vh]"
     >
-      {/* Header */}
       <div
         className={`flex justify-between items-center mb-3 p-2 rounded ${COLUMN_STYLES[columnId]} `}
       >
@@ -53,9 +54,13 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
       </div>
 
       <div className="flex-1 overflow-y-auto overflow-x-hidden space-y-2 pr-1">
-        {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+        {tasks.length === 0 ? (
+          <div className="flex items-center justify-center h-full">
+            <span className="text-xs text-gray-400 italic">No tasks yet</span>
+          </div>
+        ) : (
+          tasks.map((task) => <TaskCard key={task.id} task={task} />)
+        )}
 
         {isAdding && (
           <input
