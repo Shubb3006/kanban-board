@@ -52,7 +52,6 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
         </button>
       </div>
 
-      {/* Task List */}
       <div className="flex-1 overflow-y-auto overflow-x-hidden space-y-2 pr-1">
         {tasks.map((task) => (
           <TaskCard key={task.id} task={task} />

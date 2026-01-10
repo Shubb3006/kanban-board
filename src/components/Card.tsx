@@ -12,6 +12,7 @@ interface TaskCardProps {
 const TaskCard = ({ task }: TaskCardProps) => {
   const { deleteTask, editTask } = useKanbanStore();
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [title, setTitle] = useState(task.title);
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -23,8 +24,6 @@ const TaskCard = ({ task }: TaskCardProps) => {
     transform: CSS.Translate.toString(transform),
     touchAction: "none",
   };
-
-  const handleDelete = () => deleteTask(task.id);
 
   const handleEdit = () => {
     if (!title.trim()) return;
@@ -48,9 +47,11 @@ const TaskCard = ({ task }: TaskCardProps) => {
       style={style}
       className="bg-base-100 p-3 rounded shadow wrap-break-word flex justify-between items-center"
     >
-      <div {...listeners} {...attributes} className="text-gray-500 mr-2">
-        <GripVertical size={16} className="cursor-grab" />
-      </div>
+      {!isEditing && !isDeleting && (
+        <div {...listeners} {...attributes} className="text-gray-500 mr-2">
+          <GripVertical size={16} className="cursor-grab" />
+        </div>
+      )}
 
       {isEditing ? (
         <input
@@ -67,6 +68,21 @@ const TaskCard = ({ task }: TaskCardProps) => {
           }}
           className="flex-1 min-w-0 text-sm bg-transparent border-b border-gray-400 outline-none"
         />
+      ) : isDeleting ? (
+        <div className="flex-1 rounded-md bg-red-50 border border-red-200 p-2">
+          <p className="text-sm font-medium text-red-700">Delete this task?</p>
+          <div className="flex justify-end gap-2 mt-2">
+            <button
+              className="btn btn-xs btn-error"
+              onClick={() => deleteTask(task.id)}
+            >
+              Yes
+            </button>
+            <button className="btn btn-xs" onClick={() => setIsDeleting(false)}>
+              No
+            </button>
+          </div>
+        </div>
       ) : (
         <p
           className="flex-1 text-sm break-all cursor-text"
@@ -77,13 +93,16 @@ const TaskCard = ({ task }: TaskCardProps) => {
         </p>
       )}
 
-      <div className="flex gap-1">
-        <button className="btn btn-ghost btn-xs" onClick={handleDelete}>
-          <Trash2 size={14} />
-        </button>
-      </div>
-
-    
+      {!isDeleting && !isEditing && (
+        <div className="flex gap-1">
+          <button
+            className="btn btn-ghost btn-xs"
+            onClick={() => setIsDeleting(true)}
+          >
+            <Trash2 size={14} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
