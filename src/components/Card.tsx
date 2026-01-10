@@ -1,10 +1,9 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { Trash2, GripVertical, Pencil } from "lucide-react";
+import { Trash2, GripVertical } from "lucide-react";
 import { useKanbanStore } from "../store/useKanBanStore";
 import type { Task } from "../store/useKanBanStore";
 import { useState } from "react";
-import EditTaskModal from "./modals/EditTaskModal";
 
 interface TaskCardProps {
   task: Task;
@@ -79,7 +78,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
         <p
           className="flex-1 text-sm break-all cursor-text"
           onDoubleClick={() => setIsEditing(true)} // desktop
-            onTouchEnd={handleTextTap} // mobile
+          onTouchEnd={handleTextTap} // mobile
         >
           {task.title}
         </p>
