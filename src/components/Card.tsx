@@ -79,7 +79,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
         <p
           className="flex-1 text-sm break-all cursor-text"
           onDoubleClick={() => setIsEditing(true)} // desktop
-          onTouchEnd={handleTextTap} // mobile
+            onTouchEnd={handleTextTap} // mobile
         >
           {task.title}
         </p>
