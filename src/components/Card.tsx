@@ -83,14 +83,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
         </button>
       </div>
 
-      {/* {isEditing && (
-        <EditTaskModal
-          handleEdit={handleEdit}
-          title={title}
-          setTitle={setTitle}
-          onClose={() => setIsEditing(false)}
-        />
-      )} */}
+    
     </div>
   );
 };
