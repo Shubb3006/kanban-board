@@ -79,7 +79,6 @@ const TaskCard = ({
         <div
           className="flex-1 rounded-md bg-red-50 border border-red-200 p-2"
           onKeyDown={(e) => {
-            if (e.key === "Enter") deleteTask(task.id);
             if (e.key === "Escape") onCancelDelete();
           }}
         >
