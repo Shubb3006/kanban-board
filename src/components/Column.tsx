@@ -23,6 +23,7 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
 
   const [isAdding, setIsAdding] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +60,15 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
             <span className="text-xs text-gray-400 italic">No tasks yet</span>
           </div>
         ) : (
-          tasks.map((task) => <TaskCard key={task.id} task={task} />)
+          tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              isDeleting={deletingId === task.id}
+              onRequestDelete={() => setDeletingId(task.id)}
+              onCancelDelete={() => setDeletingId(null)}
+            />
+          ))
         )}
 
         {isAdding && (

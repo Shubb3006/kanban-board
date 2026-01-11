@@ -7,12 +7,19 @@ import { useState } from "react";
 
 interface TaskCardProps {
   task: Task;
+  isDeleting: boolean;
+  onRequestDelete: () => void;
+  onCancelDelete: () => void;
 }
 
-const TaskCard = ({ task }: TaskCardProps) => {
+const TaskCard = ({
+  task,
+  isDeleting,
+  onCancelDelete,
+  onRequestDelete,
+}: TaskCardProps) => {
   const { deleteTask, editTask } = useKanbanStore();
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
   const [title, setTitle] = useState(task.title);
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -73,7 +80,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
           className="flex-1 rounded-md bg-red-50 border border-red-200 p-2"
           onKeyDown={(e) => {
             if (e.key === "Enter") deleteTask(task.id);
-            if (e.key === "Escape") setIsDeleting(false);
+            if (e.key === "Escape") onCancelDelete();
           }}
         >
           <p className="text-sm font-medium text-red-700">Delete this task?</p>
@@ -84,7 +91,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
             >
               Yes
             </button>
-            <button className="btn btn-xs" onClick={() => setIsDeleting(false)}>
+            <button className="btn btn-xs" onClick={onCancelDelete}>
               No
             </button>
           </div>
@@ -101,10 +108,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
 
       {!isDeleting && !isEditing && (
         <div className="flex gap-1">
-          <button
-            className="btn btn-ghost btn-xs"
-            onClick={() => setIsDeleting(true)}
-          >
+          <button className="btn btn-ghost btn-xs" onClick={onRequestDelete}>
             <Trash2 size={14} />
           </button>
         </div>

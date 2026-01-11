@@ -9,8 +9,8 @@ import {
 } from "@dnd-kit/core";
 import { useState } from "react";
 import Column from "./Column";
-import TaskCard from "./Card";
 import { useKanbanStore, type Task } from "../store/useKanBanStore";
+import TaskCardPreview from "./TaskCardPreview";
 
 const KanbanBoard = () => {
   const sensors = useSensors(
@@ -64,8 +64,9 @@ const KanbanBoard = () => {
         <Column title="Done" columnId="done" tasks={doneTasks} />
       </div>
 
-      {/* Drag Overlay */}
-      <DragOverlay>{activeTask && <TaskCard task={activeTask} />}</DragOverlay>
+      <DragOverlay>
+        {activeTask && <TaskCardPreview task={activeTask} />}
+      </DragOverlay>
     </DndContext>
   );
 };
