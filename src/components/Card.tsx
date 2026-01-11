@@ -86,6 +86,7 @@ const TaskCard = ({
           <p className="text-sm font-medium text-red-700">Delete this task?</p>
           <div className="flex justify-end gap-2 mt-2">
             <button
+              autoFocus
               className="btn btn-xs btn-error"
               onClick={() => deleteTask(task.id)}
             >

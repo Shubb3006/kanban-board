@@ -55,7 +55,7 @@ const Column = ({ title, columnId, tasks }: ColumnProps) => {
       </div>
 
       <div className="flex-1 overflow-y-auto overflow-x-hidden space-y-2 pr-1">
-        {tasks.length === 0 ? (
+        {tasks.length === 0 && !isAdding ? (
           <div className="flex items-center justify-center h-full">
             <span className="text-xs text-gray-400 italic">No tasks yet</span>
           </div>
